@@ -1,0 +1,5 @@
+提示项目sdk版本不能低于依赖库版本
+
+在项目的Mianfest文件中添加：
+
+<uses-sdk tools:overrideLibrary="com.wgl.mvp"/>
