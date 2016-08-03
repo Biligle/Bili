@@ -2,6 +2,7 @@ package com.shanshan.housekeeper.welcom;
 
 import android.os.Bundle;
 import android.os.Message;
+import android.view.Window;
 import android.view.animation.Animation;
 import android.view.animation.AnimationUtils;
 
@@ -42,6 +43,7 @@ public class SplashActivity extends ActivityPresenter<SplashView> {
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
+        requestWindowFeature(Window.FEATURE_NO_TITLE);
         super.onCreate(savedInstanceState);
         Animation animation = AnimationUtils.loadAnimation(SplashActivity.this, R.anim.zoom_enter);
         baseView.ivSplash.startAnimation(animation);
