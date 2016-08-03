@@ -1,8 +1,5 @@
 package com.shanshan.housekeeper.login;
 
-import android.graphics.BitmapFactory;
-import android.graphics.drawable.BitmapDrawable;
-import android.graphics.drawable.Drawable;
 import android.view.View;
 import android.view.ViewGroup;
 import android.view.animation.Animation;
@@ -12,8 +9,6 @@ import android.widget.EditText;
 import android.widget.FrameLayout;
 import android.widget.PopupWindow;
 import android.widget.TextView;
-
-import com.shanshan.housekeeper.Help.utils.CommonUtil;
 import com.shanshan.housekeeper.R;
 import com.wgl.mvp.circleImageView.CircleImageView;
 import com.wgl.mvp.slideholder.LayoutRelative;
@@ -26,7 +21,7 @@ import com.wgl.mvp.view.AppDelegate;
 public class VLogin extends AppDelegate {
 
     public EditText etUser,etPassword;
-    public Button btLogin,bt1,bt2,bt3;
+    public Button btLogin,bt1,bt2,bt3,bt_1,bt_2,bt_3,bt_4,bt_5,bt_6,bt_7;
     public CircleImageView imageView;
     public PopupWindow popupWindow;
     public View view;
@@ -36,7 +31,6 @@ public class VLogin extends AppDelegate {
     public Animation animToLeft;
     public Animation animToRight;
     public FrameLayout frame;
-    public Drawable drawable;
 
     @Override
     public int getRootLayoutId() {
@@ -76,7 +70,12 @@ public class VLogin extends AppDelegate {
         animToLeft = AnimationUtils.loadAnimation(getActivity(),R.anim.push_left_in);
         animToRight = AnimationUtils.loadAnimation(getActivity(),R.anim.push_left_out_1);
         frame = get(R.id.frame);
-//        drawable = getActivity().getResources().getDrawable(R.mipmap.a);
-//        drawable.setBounds(100,0,10,10);
+        bt_1 = get(R.id.bt1);
+        bt_2 = get(R.id.bt2);
+        bt_3 = get(R.id.bt3);
+        bt_4 = get(R.id.bt4);
+        bt_5 = get(R.id.bt5);
+        bt_6 = get(R.id.bt6);
+        bt_7 = get(R.id.bt7);
     }
 }
