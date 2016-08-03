@@ -2,13 +2,11 @@ package com.shanshan.housekeeper.login;
 
 import android.app.Activity;
 import android.content.Context;
-import android.content.Intent;
-import android.graphics.BitmapFactory;
-import android.graphics.drawable.BitmapDrawable;
+import android.content.pm.PackageManager;
 import android.graphics.drawable.ColorDrawable;
-import android.graphics.drawable.Drawable;
 import android.net.Uri;
-import android.os.Environment;
+import android.os.Handler;
+import android.support.annotation.NonNull;
 import android.view.Gravity;
 import android.view.MotionEvent;
 import android.view.View;
@@ -16,8 +14,8 @@ import android.view.ViewGroup;
 import android.view.WindowManager;
 import android.widget.ImageView;
 import android.widget.PopupWindow;
+import android.widget.Toast;
 
-import com.shanshan.housekeeper.Help.base.BaseActivity;
 import com.shanshan.housekeeper.Help.utils.CommonUtil;
 import com.shanshan.housekeeper.Help.utils.LogCatUtil;
 import com.shanshan.housekeeper.Help.utils.MyToastView;
@@ -27,20 +25,24 @@ import com.shanshan.housekeeper.R;
 import com.shanshan.housekeeper.interfaces.IResponse;
 import com.wgl.mvp.headerPicture.HeaderActivity;
 import com.wgl.mvp.headerPicture.HeaderPicture;
+import com.wgl.mvp.message.GetMessageUtil;
+import com.wgl.mvp.message.IGetMessage;
+import com.wgl.mvp.message.SendMesssage;
 import com.wgl.mvp.model.IModel;
+import com.wgl.mvp.requestPermission.RequestPermissionUtil;
 import com.wgl.mvp.slideholder.LayoutRelative;
 import com.wgl.mvp.slideholder.SlideHolder;
-
-import java.io.File;
 
 /**
  * Created by wgl.
  * P层（将原来的activity加以改造）
  */
-public class PLoginActivity extends HeaderActivity<VLogin> implements IResponse {
+public class PLoginActivity extends HeaderActivity<VLogin> implements IResponse,IGetMessage {
 
-    HeaderPicture headerPicture = new HeaderPicture(PLoginActivity.this);
+    private HeaderPicture headerPicture = new HeaderPicture(PLoginActivity.this);
+    private SendMesssage messsageUtil = new SendMesssage(this);
     private int animMoveClass = 0;
+    private GetMessageUtil autoGetCodeUtil;
 
     /**
      * 实例化View
@@ -65,6 +67,24 @@ public class PLoginActivity extends HeaderActivity<VLogin> implements IResponse 
         });
     }
 
+    @Override
+    protected void onResume() {
+        super.onResume();
+        //注册截取短信监听
+        autoGetCodeUtil = new GetMessageUtil(this,this,
+                new Handler(),null);
+        getContentResolver().registerContentObserver(Uri.parse("content://sms/"),true,autoGetCodeUtil);
+    }
+
+    @Override
+    protected void onPause() {
+        super.onPause();
+        //解绑截取短信监听
+        if(getContentResolver() != null && autoGetCodeUtil != null){
+            getContentResolver().unregisterContentObserver(autoGetCodeUtil);
+        }
+    }
+
     /**
      * 按钮监听
      */
@@ -73,7 +93,23 @@ public class PLoginActivity extends HeaderActivity<VLogin> implements IResponse 
         super.setListener();
         baseView.etUser.setText("15201163153");
         baseView.etPassword.setText("woaini1314");
-        baseView.setOnClickListener(onClickListener,R.id.et_password,R.id.et_user, R.id.button1, R.id.tou,R.id.bt1_touxiang,R.id.bt2_touxiang,R.id.bt3_touxiang,R.id.left,R.id.right,R.id.frame);
+        baseView.setOnClickListener(onClickListener,
+                R.id.et_password,
+                R.id.et_user,
+                R.id.button1,
+                R.id.tou,
+                R.id.bt1_touxiang,
+                R.id.bt2_touxiang,
+                R.id.bt3_touxiang,
+                R.id.left,
+                R.id.right,
+                R.id.frame,
+                R.id.bt1,
+                R.id.bt2,
+                R.id.bt3,
+                R.id.bt4,
+                R.id.bt5,
+                R.id.bt6);
     }
 
     private View.OnClickListener onClickListener = new View.OnClickListener() {
@@ -194,6 +230,51 @@ public class PLoginActivity extends HeaderActivity<VLogin> implements IResponse 
                         setSlidingMenu();
                     }
                     break;
+                case R.id.bt1:
+                    //发短信
+                    if (animMoveClass == 1) {
+                        setSlidingMenu();
+                    }
+                    messsageUtil.sendSMS("hello，world！");
+                    break;
+                case R.id.bt2:
+                    baseView.slideHolder.setEnabled(true);
+                    baseView.slideHolder.toggle();
+                    if (animMoveClass == 1) {
+                        setSlidingMenu();
+                    }
+
+                    break;
+                case R.id.bt3:
+                    if (animMoveClass == 1) {
+                        setSlidingMenu();
+                    }
+
+                    break;
+                case R.id.bt4:
+                    if (animMoveClass == 1) {
+                        setSlidingMenu();
+                    }
+
+                    break;
+                case R.id.bt5:
+                    if (animMoveClass == 1) {
+                        setSlidingMenu();
+                    }
+
+                    break;
+                case R.id.bt6:
+                    if (animMoveClass == 1) {
+                        setSlidingMenu();
+                    }
+
+                    break;
+                case R.id.bt7:
+                    if (animMoveClass == 1) {
+                        setSlidingMenu();
+                    }
+
+                    break;
             }
         }
     };
@@ -279,4 +360,20 @@ public class PLoginActivity extends HeaderActivity<VLogin> implements IResponse 
         return baseView.imageView;
     }
 
+    @Override
+    public void onRequestPermissionsResult(int requestCode, @NonNull String[] permissions, @NonNull int[] grantResults) {
+        switch (requestCode){
+            case RequestPermissionUtil.REQUEST_SEND_SMS:
+                if(grantResults[0] != PackageManager.PERMISSION_GRANTED){
+                    Toast.makeText(this,"权限被拒绝,请检查权限",Toast.LENGTH_SHORT).show();
+                }
+                break;
+        }
+
+    }
+
+    @Override
+    public void getMessage(String ms) {
+        MyToastView.showToast(ms,this);
+    }
 }
