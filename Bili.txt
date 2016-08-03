@@ -1,36 +1,36 @@
-ËÄ¸ö·â×°·½·¨
-1¡¢Ô²ĞÎImageView
+å››ä¸ªå°è£…æ–¹æ³•
+1ã€åœ†å½¢ImageView
 
-Ö±½ÓËµÓÃ·¨ÁË£º
-Ô²ĞÎImageView
-Ö±½ÓÓÃ£¬
+ç›´æ¥è¯´ç”¨æ³•äº†ï¼š
+åœ†å½¢ImageView
+ç›´æ¥ç”¨ï¼Œ
 <com......CircleIamgeVIew>
 width
 height
 src
-ÉèÖÃÍâ»·civ_border_width="2dp"
-ÉèÖÃÍâ»·ÑÕÉ«civ_border_color="@color/colorAccent"
+è®¾ç½®å¤–ç¯civ_border_width="2dp"
+è®¾ç½®å¤–ç¯é¢œè‰²civ_border_color="@color/colorAccent"
 </com......CircleIamgeVIew>
 
-2¡¢ÉèÖÃÍ·Ïñ£¨Ïà²áºÍÕÕÏà£©
+2ã€è®¾ç½®å¤´åƒï¼ˆç›¸å†Œå’Œç…§ç›¸ï¼‰
 
-ÊµÀı»¯Í·ÏñÀà£¨ÕÕÏàºÍÏà²á£©
+å®ä¾‹åŒ–å¤´åƒç±»ï¼ˆç…§ç›¸å’Œç›¸å†Œï¼‰
 HeaderPicture headerPicture = new HeaderPicture(PLoginActivity.this);
 	
-ÕÕÏà·½·¨£ºcamera()
+ç…§ç›¸æ–¹æ³•ï¼šcamera()
 	
-Ïà²á·½·¨£ºgallery()
+ç›¸å†Œæ–¹æ³•ï¼šgallery()
 
-»Øµ÷ÉèÖÃÍ·Ïñ£¬Ö»ĞèÒª¼Ì³ĞHeaderActivity£¬ÊµÏÖsetPhoto()
-
-
+å›è°ƒè®¾ç½®å¤´åƒï¼Œåªéœ€è¦ç»§æ‰¿HeaderActivityï¼Œå®ç°setPhoto()
 
 
-3¡¢²à»¬²Ëµ¥
-	//³õÊ¼»¯SliderHolder£¬Ê×ÏÈÒş²Ø²ß»®²Ëµ¥
+
+
+3ã€ä¾§æ»‘èœå•
+	//åˆå§‹åŒ–SliderHolderï¼Œé¦–å…ˆéšè—ç­–åˆ’èœå•
 	baseView.slideHolder.setEnabled(false);
-	//baseView.slideHolder.setDirection(-1);//ÓÒ±ß»¬³ö
-	//baseView.slideHolder.setSpeed(2);//ÉèÖÃ»¬³öËÙ¶È
+	//baseView.slideHolder.setDirection(-1);//å³è¾¹æ»‘å‡º
+	//baseView.slideHolder.setSpeed(2);//è®¾ç½®æ»‘å‡ºé€Ÿåº¦
         baseView.slideHolder.setOnSlideListener(new SlideHolder.OnSlideListener() {
             @Override
             public void onSlideCompleted(boolean opened) {
@@ -38,11 +38,11 @@ HeaderPicture headerPicture = new HeaderPicture(PLoginActivity.this);
             }
         });
 
-	//µã»÷Ö®ºó²Ëµ¥»¬³ö
+	//ç‚¹å‡»ä¹‹åèœå•æ»‘å‡º
 	baseView.slideHolder.setEnabled(true);
         baseView.slideHolder.toggle();
         baseView.layoutRelativeLeft.setOnScrollListener
-		//ÓÒ±ß»¬³ö
+		//å³è¾¹æ»‘å‡º
 		doOnScrollRight{
 			if(null != baseView.slideHolder){
                             if(baseView.slideHolder.isOpened()){
@@ -53,11 +53,40 @@ HeaderPicture headerPicture = new HeaderPicture(PLoginActivity.this);
                         baseView.slideHolder.toggle();
                     }
 		}
-		//×ó±ß»¬³ö
-		doOnScrollLeft{´úÂëÍ¬ÉÏ}
-4¡¢½â¾öÏîÄ¿±ÀÀ£ÎÊÌâ
-	ÔÚApplicationµÄonCreate·½·¨ÀïÌí¼Ó
+		//å·¦è¾¹æ»‘å‡º
+		doOnScrollLeft{ä»£ç åŒä¸Š}
+4ã€è§£å†³é¡¹ç›®å´©æºƒé—®é¢˜
+	åœ¨Applicationçš„onCreateæ–¹æ³•é‡Œæ·»åŠ 
 	CrashHandler crashHandler = CrashHandler.getInstance();
-        crashHandler.init(this);//´¦ÀíÎ´²¶×½µÄÒì³££¬±ÜÃâ³öÏÖ±ÀÀ£
+        crashHandler.init(this);//å¤„ç†æœªæ•æ‰çš„å¼‚å¸¸ï¼Œé¿å…å‡ºç°å´©æºƒ
+
+5ã€å‘é€çŸ­ä¿¡
+   new SendMesssage(PLoginActivity.this).sendSMS("helloï¼Œworldï¼");
+
+6ã€ç›‘å¬æˆªå–çŸ­ä¿¡
+   //å®ç°æ¥å£IGetMessage
+   PLoginActivity implements IGetMessage
+   //å®ç°æ–¹æ³•
+    @Override
+    public void getMessage(String ms) {
+        MyToastView.showToast(ms,this);
+    }
+   @Override
+    protected void onResume() {
+        super.onResume();
+        //æ³¨å†Œæˆªå–çŸ­ä¿¡ç›‘å¬
+        autoGetCodeUtil = new GetMessageUtil(this,this,
+                new Handler(),null);
+        getContentResolver().registerContentObserver(Uri.parse("content://sms/"),true,autoGetCodeUtil);
+    }
+
+    @Override
+    protected void onPause() {
+        super.onPause();
+        //è§£ç»‘æˆªå–çŸ­ä¿¡ç›‘å¬
+        if(getContentResolver() != null && autoGetCodeUtil != null){
+            getContentResolver().unregisterContentObserver(autoGetCodeUtil);
+        }
+    }
 
 
