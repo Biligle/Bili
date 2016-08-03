@@ -5,12 +5,26 @@
 
     <supports-screens android:largeScreens="true" android:normalScreens="true" android:smallScreens="true" android:xlargeScreens="true"/>
 
+    <!-- 授予该程序使用网络的权限 -->
     <uses-permission android:name="android.permission.INTERNET"/>
+    <!-- 授予该程序获取网络状态的权限 -->
     <uses-permission android:name="android.permission.ACCESS_NETWORK_STATE"/>
+    <!-- 授予该程序使用摄像头的权限 -->
     <uses-permission android:name="android.permission.CAMERA" />
+    <!-- 授予使用外部存储器的权限 -->
     <uses-permission android:name="android.permission.WRITE_EXTERNAL_STORAGE" />
+    <!-- 授予发送短信的权限 -->
     <uses-permission android:name="android.permission.SEND_SMS"/>
+    <!-- 授予读取短信的权限 -->
     <uses-permission android:name="android.permission.READ_SMS"/>
+
+    <!-- 授予该程序录制声音的权限 -->
+    <uses-permission android:name="android.permission.RECORD_AUDIO"/>
+    <uses-permission android:name="android.permission.MOUNT_UNMOUNT_FILESYSTEMS"/>
+
+    <!-- 授予打电话的权限 -->
+    <uses-permission android:name="android.permission.CALL_PHONE"/>
+
     <uses-sdk tools:overrideLibrary="com.wgl.mvp"/>
     <application
         android:name=".Help.base.MyApplication"
@@ -26,7 +40,6 @@
         <activity android:name=".welcom.SplashActivity">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN"/>
-
                 <category android:name="android.intent.category.LAUNCHER"/>
             </intent-filter>
         </activity>
