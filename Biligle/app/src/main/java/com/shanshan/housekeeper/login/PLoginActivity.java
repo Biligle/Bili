@@ -5,17 +5,18 @@ import android.content.Context;
 import android.content.pm.PackageManager;
 import android.graphics.drawable.ColorDrawable;
 import android.net.Uri;
+import android.os.Bundle;
 import android.os.Handler;
 import android.support.annotation.NonNull;
 import android.view.Gravity;
 import android.view.MotionEvent;
 import android.view.View;
 import android.view.ViewGroup;
+import android.view.Window;
 import android.view.WindowManager;
 import android.widget.ImageView;
 import android.widget.PopupWindow;
 import android.widget.Toast;
-
 import com.shanshan.housekeeper.Help.utils.CommonUtil;
 import com.shanshan.housekeeper.Help.utils.LogCatUtil;
 import com.shanshan.housekeeper.Help.utils.MyToastView;
@@ -23,7 +24,8 @@ import com.shanshan.housekeeper.Help.utils.OtherCommon;
 import com.shanshan.housekeeper.picture.PPictureActivity;
 import com.shanshan.housekeeper.R;
 import com.shanshan.housekeeper.interfaces.IResponse;
-import com.wgl.mvp.headerPicture.HeaderActivity;
+import com.wgl.mvp.activityResult.ActivityResult;
+import com.wgl.mvp.call.Call;
 import com.wgl.mvp.headerPicture.HeaderPicture;
 import com.wgl.mvp.message.GetMessageUtil;
 import com.wgl.mvp.message.IGetMessage;
@@ -32,15 +34,15 @@ import com.wgl.mvp.model.IModel;
 import com.wgl.mvp.requestPermission.RequestPermissionUtil;
 import com.wgl.mvp.slideholder.LayoutRelative;
 import com.wgl.mvp.slideholder.SlideHolder;
+import com.wgl.mvp.video.VideoUtil;
 
 /**
  * Created by wgl.
  * P层（将原来的activity加以改造）
  */
-public class PLoginActivity extends HeaderActivity<VLogin> implements IResponse,IGetMessage {
+public class PLoginActivity extends ActivityResult<VLogin> implements IResponse,IGetMessage {
 
     private HeaderPicture headerPicture = new HeaderPicture(PLoginActivity.this);
-    private SendMesssage messsageUtil = new SendMesssage(this);
     private int animMoveClass = 0;
     private GetMessageUtil autoGetCodeUtil;
 
@@ -54,10 +56,16 @@ public class PLoginActivity extends HeaderActivity<VLogin> implements IResponse,
     }
 
     @Override
+    protected void onCreate(Bundle savedInstanceState) {
+        requestWindowFeature(Window.FEATURE_NO_TITLE);
+        super.onCreate(savedInstanceState);
+    }
+
+    @Override
     protected void setNormal() {
         super.setNormal();
         baseView.slideHolder.setEnabled(false);
-//        baseView.slideHolder.setSpeed(2);
+        baseView.slideHolder.setSpeed(2);
 //        baseView.slideHolder.setDirection(-1);//右边滑出
         baseView.slideHolder.setOnSlideListener(new SlideHolder.OnSlideListener() {
             @Override
@@ -107,9 +115,8 @@ public class PLoginActivity extends HeaderActivity<VLogin> implements IResponse,
                 R.id.bt1,
                 R.id.bt2,
                 R.id.bt3,
-                R.id.bt4,
                 R.id.bt5,
-                R.id.bt6);
+                R.id.bt7);
     }
 
     private View.OnClickListener onClickListener = new View.OnClickListener() {
@@ -235,7 +242,7 @@ public class PLoginActivity extends HeaderActivity<VLogin> implements IResponse,
                     if (animMoveClass == 1) {
                         setSlidingMenu();
                     }
-                    messsageUtil.sendSMS("hello，world！");
+                    new SendMesssage(PLoginActivity.this).sendSMS("hello，world！");
                     break;
                 case R.id.bt2:
                     baseView.slideHolder.setEnabled(true);
@@ -246,34 +253,24 @@ public class PLoginActivity extends HeaderActivity<VLogin> implements IResponse,
 
                     break;
                 case R.id.bt3:
+                    //录音
                     if (animMoveClass == 1) {
                         setSlidingMenu();
                     }
-
-                    break;
-                case R.id.bt4:
-                    if (animMoveClass == 1) {
-                        setSlidingMenu();
-                    }
-
+                    new VideoUtil(PLoginActivity.this).soundRecorderMethod();
                     break;
                 case R.id.bt5:
+                    //录视频
                     if (animMoveClass == 1) {
                         setSlidingMenu();
                     }
-
-                    break;
-                case R.id.bt6:
-                    if (animMoveClass == 1) {
-                        setSlidingMenu();
-                    }
-
+                    new VideoUtil(PLoginActivity.this).videoMethod();
                     break;
                 case R.id.bt7:
                     if (animMoveClass == 1) {
                         setSlidingMenu();
                     }
-
+                    new Call(PLoginActivity.this).call("10086");
                     break;
             }
         }
