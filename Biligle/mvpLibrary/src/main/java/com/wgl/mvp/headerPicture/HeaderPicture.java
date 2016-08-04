@@ -14,7 +14,7 @@ import android.provider.MediaStore;
 import android.util.Base64;
 import android.widget.ImageView;
 
-import com.wgl.mvp.circleImageView.RequestPermissionUtil;
+import com.wgl.mvp.requestPermission.RequestPermissionUtil;
 
 import java.io.ByteArrayOutputStream;
 import java.io.File;
