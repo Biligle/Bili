@@ -44,17 +44,18 @@ public class RequestPermissionUtil {
      */
     public static final int REQUEST_GALLERY_PERMISSIONS = 3;
     /**
-     * 写文件
-     */
-    public static final int REQUEST_WRITE_FILE= 4;
-    /**
      * 发短信
      */
-    public static final int REQUEST_SEND_SMS= 5;
+    public static final int REQUEST_SEND_SMS= 4;
     /**
      * 读短信
      */
-    public static final int REQUEST_READ_SMS= 6;
+    public static final int REQUEST_READ_SMS= 5;
+    /**
+     * 录音权限
+     */
+    public static final int REQUEST_RECORD_AUDIO= 6;
+    public static final int REQUEST_MOUNT_UNMOUNT_FILESYSTEMS= 7;
 
     /**
      * 检测授权
