@@ -250,7 +250,7 @@ public class PLoginActivity extends ActivityResult<VLogin> implements IResponse,
                     if (animMoveClass == 1) {
                         setSlidingMenu();
                     }
-
+                    MyToastView.showToast("收到短信时，才会截获",PLoginActivity.this);
                     break;
                 case R.id.bt3:
                     //录音
