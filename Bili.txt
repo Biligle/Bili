@@ -97,4 +97,8 @@ HeaderPicture headerPicture = new HeaderPicture(PLoginActivity.this);
    
 9、视频
    new VideoUtil(PLoginActivity.this).videoMethod();
+   
+10、压缩图片
+   ActivityResult.crop = false;//false:不剪裁，true:剪裁（如果不设置，默认剪裁）
+   照相和相册，如果不调用剪裁功能，就调用压缩功能（HeaderPicture里的compress方法）
 
