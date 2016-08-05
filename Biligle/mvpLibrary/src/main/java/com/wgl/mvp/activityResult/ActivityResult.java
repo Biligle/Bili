@@ -2,8 +2,11 @@ package com.wgl.mvp.activityResult;
 
 import android.content.Intent;
 import android.database.Cursor;
+import android.graphics.Bitmap;
+import android.graphics.BitmapFactory;
 import android.net.Uri;
 import android.os.Environment;
+import android.provider.MediaStore;
 import android.widget.ImageView;
 import android.widget.Toast;
 import com.wgl.mvp.headerPicture.HeaderPicture;
@@ -11,6 +14,8 @@ import com.wgl.mvp.presenter.ActivityPresenter;
 import com.wgl.mvp.video.VideoUtil;
 import com.wgl.mvp.view.IDelegate;
 import java.io.File;
+import java.io.FileNotFoundException;
+import java.io.IOException;
 
 /**
  * 处理回调：照相、相册、录音、录视频
@@ -19,8 +24,11 @@ import java.io.File;
 public abstract class ActivityResult<T extends IDelegate> extends ActivityPresenter<T> {
 
     protected HeaderPicture headerPicture = new HeaderPicture(this);
-    protected String base64;
-    protected abstract ImageView setPhoto();
+    public String base64;
+    protected abstract ImageView getPhoto();
+    protected abstract String getBase64(String base64);
+    public static boolean crop = true;
+    private Bitmap bm,bm2;
     @Override
     protected void onActivityResult(int requestCode, int resultCode, Intent data) {
         super.onActivityResult(requestCode, resultCode, data);
@@ -33,20 +41,52 @@ public abstract class ActivityResult<T extends IDelegate> extends ActivityPresen
                 if(requestCode == HeaderPicture.SELECT_PIC_BY_TACK_PHOTO){
                     File temp = new File(Environment.getExternalStorageDirectory()
                             + "/" + HeaderPicture.IMAGE_FILE_NAME);
-                    headerPicture.startPhotoZoom(Uri.fromFile(temp),300,300);
+                    if(temp.exists()){
+                        if(!crop){
+                            headerPicture.startPhotoZoom(Uri.fromFile(temp),300,300);
+                        }else{
+                            bm = BitmapFactory.decodeFile(Environment.getExternalStorageDirectory()
+                                    + "/" + HeaderPicture.IMAGE_FILE_NAME);
+                            //压缩到100kb
+                            bm2 = headerPicture.compress(bm,100);
+                            base64 = headerPicture.setPicgetBase64_2(bm2,getPhoto());
+                            if(!bm.isRecycled() && !bm2.isRecycled()){
+                                bm.recycle();
+                                bm2.recycle();
+                            }
+                            getBase64(base64);
+                        }
+                    }
                     return;
                 }
                 if(requestCode == HeaderPicture.SELECT_PIC_BY_PICK_PHOTO){
                     try {
-                        headerPicture.startPhotoZoom(data.getData(),300,300);
+                        if(!crop){
+                            headerPicture.startPhotoZoom(data.getData(),300,300);
+                        }else{
+                            bm = MediaStore.Images.Media.getBitmap(getContentResolver(),data.getData());
+                            //压缩到100kb
+                            bm2 = headerPicture.compress(bm,100);
+                            base64 = headerPicture.setPicgetBase64_2(bm2,getPhoto());
+                            if(!bm.isRecycled() && !bm2.isRecycled()){
+                                bm.recycle();
+                                bm2.recycle();
+                            }
+                            getBase64(base64);
+                        }
                     } catch (NullPointerException e) {
                         e.printStackTrace();//用户点击取消操作
+                    } catch (FileNotFoundException e) {
+                        e.printStackTrace();
+                    } catch (IOException e) {
+                        e.printStackTrace();
                     }
                     return;
                 }
                 if(requestCode == HeaderPicture.REQUESTCODE_CUTTING){
                     if (data != null) {
-                        base64 = headerPicture.setPicgetBase64(data,setPhoto());
+                        base64 = headerPicture.setPicgetBase64(data,getPhoto());
+                        getBase64(base64);
                     }
                 }
                 break;
@@ -99,6 +139,16 @@ public abstract class ActivityResult<T extends IDelegate> extends ActivityPresen
                     }
                 break;
 
+        }
+    }
+
+    @Override
+    protected void onDestroy() {
+        super.onDestroy();
+        if(null != bm && null != bm2){
+            //回收Bitmap,防止内存溢出OOM
+            bm.recycle();
+            bm2.recycle();
         }
     }
 }
