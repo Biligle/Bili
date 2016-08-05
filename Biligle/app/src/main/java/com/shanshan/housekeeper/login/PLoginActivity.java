@@ -155,10 +155,12 @@ public class PLoginActivity extends ActivityResult<VLogin> implements IResponse,
                     initPopuWindow(PLoginActivity.this, baseView.popupWindow, baseView.view, 1);
                     break;
                 case R.id.bt1_touxiang:
+                    ActivityResult.crop = false;//false:不剪裁，true:剪裁（如果不设置，默认剪裁）
                     headerPicture.camera();
                     baseView.popupWindow.dismiss();
                     break;
                 case R.id.bt2_touxiang:
+                    ActivityResult.crop = false;
                     headerPicture.gallery();
                     baseView.popupWindow.dismiss();
                     break;
@@ -239,6 +241,8 @@ public class PLoginActivity extends ActivityResult<VLogin> implements IResponse,
                     break;
                 case R.id.bt1:
                     //发短信
+                    baseView.slideHolder.setEnabled(true);
+                    baseView.slideHolder.toggle();
                     if (animMoveClass == 1) {
                         setSlidingMenu();
                     }
@@ -250,10 +254,11 @@ public class PLoginActivity extends ActivityResult<VLogin> implements IResponse,
                     if (animMoveClass == 1) {
                         setSlidingMenu();
                     }
-                    MyToastView.showToast("收到短信时，才会截获",PLoginActivity.this);
                     break;
                 case R.id.bt3:
                     //录音
+                    baseView.slideHolder.setEnabled(true);
+                    baseView.slideHolder.toggle();
                     if (animMoveClass == 1) {
                         setSlidingMenu();
                     }
@@ -261,6 +266,8 @@ public class PLoginActivity extends ActivityResult<VLogin> implements IResponse,
                     break;
                 case R.id.bt5:
                     //录视频
+                    baseView.slideHolder.setEnabled(true);
+                    baseView.slideHolder.toggle();
                     if (animMoveClass == 1) {
                         setSlidingMenu();
                     }
@@ -353,8 +360,13 @@ public class PLoginActivity extends ActivityResult<VLogin> implements IResponse,
     }
 
     @Override
-    protected ImageView setPhoto() {
+    protected ImageView getPhoto() {
         return baseView.imageView;
+    }
+
+    @Override
+    protected String getBase64(String base64) {
+        return base64;
     }
 
     @Override
