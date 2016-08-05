@@ -22,7 +22,9 @@
 
 10、录视频
 
-11、studio导入依赖
+11、压缩图片
+
+12、studio导入依赖
 
   在根build.gradle里：
   
