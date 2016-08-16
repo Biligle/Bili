@@ -155,12 +155,12 @@ public class PLoginActivity extends ActivityResult<VLogin> implements IResponse,
                     initPopuWindow(PLoginActivity.this, baseView.popupWindow, baseView.view, 1);
                     break;
                 case R.id.bt1_touxiang:
-                    ActivityResult.crop = false;//false:不剪裁，true:剪裁（如果不设置，默认剪裁）
+                    ActivityResult.crop = true;//false:剪裁，true:不剪裁（如果不设置，默认剪裁）
                     headerPicture.camera();
                     baseView.popupWindow.dismiss();
                     break;
                 case R.id.bt2_touxiang:
-                    ActivityResult.crop = false;
+                    ActivityResult.crop = true;
                     headerPicture.gallery();
                     baseView.popupWindow.dismiss();
                     break;
