@@ -2,6 +2,7 @@ package com.shanshan.housekeeper.login;
 
 import android.app.Activity;
 import android.content.Context;
+import android.content.Intent;
 import android.content.pm.PackageManager;
 import android.graphics.drawable.ColorDrawable;
 import android.net.Uri;
@@ -21,6 +22,7 @@ import com.shanshan.housekeeper.Help.utils.CommonUtil;
 import com.shanshan.housekeeper.Help.utils.LogCatUtil;
 import com.shanshan.housekeeper.Help.utils.MyToastView;
 import com.shanshan.housekeeper.Help.utils.OtherCommon;
+import com.shanshan.housekeeper.morePicture.PMorePictureActivity;
 import com.shanshan.housekeeper.picture.PPictureActivity;
 import com.shanshan.housekeeper.R;
 import com.shanshan.housekeeper.interfaces.IResponse;
@@ -116,7 +118,8 @@ public class PLoginActivity extends ActivityResult<VLogin> implements IResponse,
                 R.id.bt2,
                 R.id.bt3,
                 R.id.bt5,
-                R.id.bt7);
+                R.id.bt7,
+                R.id.bt8);
     }
 
     private View.OnClickListener onClickListener = new View.OnClickListener() {
@@ -274,10 +277,22 @@ public class PLoginActivity extends ActivityResult<VLogin> implements IResponse,
                     new VideoUtil(PLoginActivity.this).videoMethod();
                     break;
                 case R.id.bt7:
+                    //打电话
+                    baseView.slideHolder.setEnabled(true);
+                    baseView.slideHolder.toggle();
                     if (animMoveClass == 1) {
                         setSlidingMenu();
                     }
                     new Call(PLoginActivity.this).call("10086");
+                    break;
+                case R.id.bt8:
+                    //读取相册所有图片
+                    baseView.slideHolder.setEnabled(true);
+                    baseView.slideHolder.toggle();
+                    if (animMoveClass == 1) {
+                        setSlidingMenu();
+                    }
+                    startActivity(new Intent(PLoginActivity.this, PMorePictureActivity.class));
                     break;
             }
         }
