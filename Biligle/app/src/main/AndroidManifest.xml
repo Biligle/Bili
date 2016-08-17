@@ -44,6 +44,7 @@
             </intent-filter>
         </activity>
         <activity android:name=".picture.PPictureActivity"/>
+        <activity android:name=".morePicture.PMorePictureActivity"/>
     </application>
 
 </manifest>
