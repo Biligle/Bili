@@ -46,6 +46,12 @@
                 android:layout_height="wrap_content"
                 android:layout_marginTop="10dp"
                 android:text="打电话"/>
+            <Button
+                android:id="@+id/bt8"
+                android:layout_width="80dp"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="10dp"
+                android:text="筛选图片"/>
         </LinearLayout>
     </com.wgl.mvp.slideholder.LayoutRelative>
 
