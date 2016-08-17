@@ -5,6 +5,7 @@ import android.app.Activity;
 import android.content.Context;
 import android.content.Intent;
 import android.graphics.Bitmap;
+import android.graphics.BitmapFactory;
 import android.graphics.Matrix;
 import android.graphics.drawable.BitmapDrawable;
 import android.graphics.drawable.Drawable;
@@ -176,11 +177,30 @@ public class HeaderPicture {
 
     /**
      * 压缩图片
-     * @param bitmap
+     * @param path
      * @param maxSize 压缩尺寸
      * @return
      */
-    public Bitmap compress(Bitmap bitmap,double maxSize) {
+    public static Bitmap compress(String path,double maxSize) {
+
+        BitmapFactory.Options op = new BitmapFactory.Options();
+        //inJustDecodeBounds
+        //If set to true, the decoder will return null (no bitmap), but the out…
+        op.inJustDecodeBounds = true;
+        Bitmap bitmap = BitmapFactory.decodeFile(path, op); //获取尺寸信息
+        //获取比例大小
+        int wRatio = (int)Math.ceil(op.outWidth/200);
+        int hRatio = (int)Math.ceil(op.outHeight/200);
+        //如果超出指定大小，则缩小相应的比例
+        if(wRatio > 1 && hRatio > 1){
+            if(wRatio > hRatio){
+                op.inSampleSize = wRatio;
+            }else{
+                op.inSampleSize = hRatio;
+            }
+        }
+        op.inJustDecodeBounds = false;
+        bitmap = BitmapFactory.decodeFile(path, op);
         //图片允许最大空间   单位：KB
 //        maxSize =100.00;
         //将bitmap放至数组中，意在bitmap的大小（与实际读取的原文件要大）
