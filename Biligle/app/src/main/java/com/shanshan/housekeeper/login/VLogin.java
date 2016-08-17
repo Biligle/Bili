@@ -21,7 +21,7 @@ import com.wgl.mvp.view.AppDelegate;
 public class VLogin extends AppDelegate {
 
     public EditText etUser,etPassword;
-    public Button btLogin,bt1,bt2,bt3,bt_1,bt_2,bt_3,bt_5,bt_7;
+    public Button btLogin,bt1,bt2,bt3,bt_1,bt_2,bt_3,bt_5,bt_7,bt_8;
     public CircleImageView imageView;
     public PopupWindow popupWindow;
     public View view;
@@ -75,5 +75,6 @@ public class VLogin extends AppDelegate {
         bt_3 = get(R.id.bt3);
         bt_5 = get(R.id.bt5);
         bt_7 = get(R.id.bt7);
+        bt_8 = get(R.id.bt8);
     }
 }
