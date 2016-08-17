@@ -45,10 +45,9 @@ public abstract class ActivityResult<T extends IDelegate> extends ActivityPresen
                         if(!crop){
                             headerPicture.startPhotoZoom(Uri.fromFile(temp),300,300);
                         }else{
-                            bm = BitmapFactory.decodeFile(Environment.getExternalStorageDirectory()
-                                    + "/" + HeaderPicture.IMAGE_FILE_NAME);
                             //压缩到100kb
-                            bm2 = headerPicture.compress(bm,100);
+                            bm2 = headerPicture.compress(Environment.getExternalStorageDirectory()
+                                    + "/" + HeaderPicture.IMAGE_FILE_NAME,100);
                             base64 = headerPicture.setPicgetBase64_2(bm2,getPhoto());
                             if(!bm.isRecycled() && !bm2.isRecycled()){
                                 bm.recycle();
@@ -64,22 +63,18 @@ public abstract class ActivityResult<T extends IDelegate> extends ActivityPresen
                         if(!crop){
                             headerPicture.startPhotoZoom(data.getData(),300,300);
                         }else{
-                            bm = MediaStore.Images.Media.getBitmap(getContentResolver(),data.getData());
+//                            bm = MediaStore.Images.Media.getBitmap(getContentResolver(),data.getData());
                             //压缩到100kb
-                            bm2 = headerPicture.compress(bm,100);
+                            bm2 = headerPicture.compress(getPath(data.getData()),100);
                             base64 = headerPicture.setPicgetBase64_2(bm2,getPhoto());
-                            if(!bm.isRecycled() && !bm2.isRecycled()){
-                                bm.recycle();
+                            if(/*!bm.isRecycled() && */!bm2.isRecycled()){
+                                /*bm.recycle();*/
                                 bm2.recycle();
                             }
                             getBase64(base64);
                         }
                     } catch (NullPointerException e) {
                         e.printStackTrace();//用户点击取消操作
-                    } catch (FileNotFoundException e) {
-                        e.printStackTrace();
-                    } catch (IOException e) {
-                        e.printStackTrace();
                     }
                     return;
                 }
@@ -149,6 +144,19 @@ public abstract class ActivityResult<T extends IDelegate> extends ActivityPresen
             //回收Bitmap,防止内存溢出OOM
             bm.recycle();
             bm2.recycle();
-        }
+        }}
+
+    private String getPath(Uri originalUri){
+        String[] proj = {MediaStore.Images.Media.DATA};
+
+        //好像是android多媒体数据库的封装接口，具体的看Android文档
+        Cursor cursor = managedQuery(originalUri, proj, null, null, null);
+        //按我个人理解 这个是获得用户选择的图片的索引值
+        int column_index = cursor.getColumnIndexOrThrow(MediaStore.Images.Media.DATA);
+        //将光标移至开头 ，这个很重要，不小心很容易引起越界
+        cursor.moveToFirst();
+        //最后根据索引值获取图片路径
+        String path = cursor.getString(column_index);
+        return path;
     }
 }
