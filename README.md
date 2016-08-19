@@ -24,7 +24,9 @@
 
 11、压缩图片
 
-12、studio导入依赖
+12、筛选图片
+
+13、studio导入依赖
 
   在根build.gradle里：
   
