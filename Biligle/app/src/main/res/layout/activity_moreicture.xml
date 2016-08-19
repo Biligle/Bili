@@ -10,8 +10,14 @@
         android:scrollbars="none"
         android:columnWidth="2dp">
     </GridView>
-    <ImageView
-        android:id="@+id/iv2"
-        android:layout_width="100dp"
-        android:layout_height="100dp" />
+    <Button
+        android:id="@+id/btPic"
+        android:layout_alignParentBottom="true"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:background="#00FFFF"
+        android:textColor="@android:color/holo_red_light"
+        android:layout_marginLeft="10dp"
+        android:textSize="20sp"
+        android:text="所有图片"/>
 </RelativeLayout>
