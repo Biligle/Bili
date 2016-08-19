@@ -187,7 +187,6 @@ public class HeaderPicture {
         //inJustDecodeBounds
         //If set to true, the decoder will return null (no bitmap), but the out…
         op.inJustDecodeBounds = true;
-        Bitmap bitmap = BitmapFactory.decodeFile(path, op); //获取尺寸信息
         //获取比例大小
         int wRatio = (int)Math.ceil(op.outWidth/200);
         int hRatio = (int)Math.ceil(op.outHeight/200);
@@ -200,7 +199,7 @@ public class HeaderPicture {
             }
         }
         op.inJustDecodeBounds = false;
-        bitmap = BitmapFactory.decodeFile(path, op);
+        Bitmap bitmap = BitmapFactory.decodeFile(path, op);
         //图片允许最大空间   单位：KB
 //        maxSize =100.00;
         //将bitmap放至数组中，意在bitmap的大小（与实际读取的原文件要大）
