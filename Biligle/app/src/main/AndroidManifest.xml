@@ -45,6 +45,7 @@
         </activity>
         <activity android:name=".picture.PPictureActivity"/>
         <activity android:name=".morePicture.PMorePictureActivity"/>
+        <activity android:name=".morePicture.PPageActivity"/>
     </application>
 
 </manifest>
