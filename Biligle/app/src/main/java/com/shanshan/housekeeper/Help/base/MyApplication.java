@@ -19,6 +19,7 @@ import com.nostra13.universalimageloader.core.assist.SimpleImageLoadingListener;
 import com.nostra13.universalimageloader.core.display.FadeInBitmapDisplayer;
 import com.nostra13.universalimageloader.core.display.RoundedBitmapDisplayer;
 import com.shanshan.housekeeper.R;
+import com.shanshan.housekeeper.login.PLoginActivity;
 import com.wgl.mvp.crashHandler.CrashHandler;
 
 import java.util.ArrayList;
@@ -59,7 +60,7 @@ public class MyApplication extends Application {
         super.onCreate();
         initImageLoader(getApplicationContext());
         CrashHandler crashHandler = CrashHandler.getInstance();
-        crashHandler.init(this);//处理未捕捉的异常，避免出现崩溃
+        crashHandler.init(this, PLoginActivity.class);//处理未捕捉的异常，避免出现崩溃
     }
 
     /**
