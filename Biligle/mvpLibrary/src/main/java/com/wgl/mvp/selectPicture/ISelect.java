@@ -17,6 +17,6 @@ public interface ISelect {
      * 获取所有图片
      * @param pictureList
      */
-    void getPicture(ArrayList<String> pictureList);
+    void getPicture(ArrayList<String> pictureList,ArrayList<String> firstPictureList);
 
 }
