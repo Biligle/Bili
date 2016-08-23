@@ -42,7 +42,8 @@ public class CrashHandler implements UncaughtExceptionHandler {
 	// CrashHandler实例
 	private static CrashHandler INSTANCE = new CrashHandler();
 	// 程序的Context对象
-	private Context mContext,mContext2;
+	private Context mContext;
+	private Class clazz;
 	// 用来存储设备信息和异常信息
 	private Map<String, String> infos = new HashMap<String, String>();
 
@@ -64,9 +65,9 @@ public class CrashHandler implements UncaughtExceptionHandler {
 	 *
 	 * @param context
 	 */
-	public void init(Context context,Context context2) {
+	public void init(Context context,Class clazz) {
 		mContext = context;
-		mContext2 = context2;
+		this.clazz = clazz;
 		// 获取系统默认的UncaughtException处理器
 		mDefaultHandler = Thread.getDefaultUncaughtExceptionHandler();
 		// 设置该CrashHandler为程序的默认处理器
@@ -83,7 +84,7 @@ public class CrashHandler implements UncaughtExceptionHandler {
 			mDefaultHandler.uncaughtException(thread, ex);
 		} else {
 			// 退出程序
-			Intent intent = new Intent(mContext, mContext2.getClass());
+			Intent intent = new Intent(mContext, clazz);
 			intent.addFlags(Intent.FLAG_ACTIVITY_NEW_TASK);
 			mContext.startActivity(intent);
 			android.os.Process.killProcess(android.os.Process.myPid());
