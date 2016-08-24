@@ -1,7 +1,9 @@
 package com.shanshan.housekeeper.morePicture;
 
+import android.util.Log;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.Button;
 import android.widget.GridView;
 import android.widget.ImageView;
 import android.widget.ListView;
@@ -19,6 +21,7 @@ public class VMorePicture extends AppDelegate{
     public ListView listView;
     public PopupWindow popupWindow;
     public View view;
+    public Button btPic;
 
     @Override
     public int getRootLayoutId() {
@@ -40,6 +43,7 @@ public class VMorePicture extends AppDelegate{
         gridView = get(R.id.gridView);
         listView = getBrother(R.id.listView);
         view = getBrotherView();
+        btPic = get(R.id.btPic);
         popupWindow = new PopupWindow(view,
                 ViewGroup.LayoutParams.WRAP_CONTENT,
                 ViewGroup.LayoutParams.WRAP_CONTENT);
