@@ -7,6 +7,7 @@ import android.graphics.drawable.ColorDrawable;
 import android.os.Bundle;
 import android.os.Handler;
 import android.os.Message;
+import android.util.Log;
 import android.view.Gravity;
 import android.view.View;
 import android.view.ViewGroup;
@@ -15,6 +16,7 @@ import android.view.WindowManager;
 import android.widget.AdapterView;
 import android.widget.PopupWindow;
 
+import com.shanshan.housekeeper.Help.utils.CommonUtil;
 import com.shanshan.housekeeper.Help.utils.LogCatUtil;
 import com.shanshan.housekeeper.R;
 import com.shanshan.housekeeper.adapter.GrideViewAdapter;
@@ -74,7 +76,7 @@ public class PMorePictureActivity extends ActivityPresenter<VMorePicture> implem
             public void onClick(View v) {
                 switch (v.getId()){
                     case R.id.btPic:
-                        initPopuWindow(PMorePictureActivity.this,baseView.popupWindow,baseView.view,2);
+                        initPopuWindow(PMorePictureActivity.this,baseView.popupWindow,baseView.view,3);
                         baseView.listView.setAdapter(new ListViewAdapter(PMorePictureActivity.this,data2));
                         baseView.listView.setOnItemClickListener(new AdapterView.OnItemClickListener() {
                             @Override
@@ -126,7 +128,6 @@ public class PMorePictureActivity extends ActivityPresenter<VMorePicture> implem
                 .getAttributes();
         lp.alpha = 0.4f;// 透明度(0.0-1.0)
         ((Activity) context).getWindow().setAttributes(lp);
-
         popupWindow.setOutsideTouchable(true);
         popupWindow.setFocusable(true);
         // 居中显示
@@ -137,6 +138,13 @@ public class PMorePictureActivity extends ActivityPresenter<VMorePicture> implem
         // 底部显示
         if (n == 2) {
             popupWindow.showAtLocation(view1, Gravity.BOTTOM, 0, 0);
+        }
+        if (n == 3) {
+            popupWindow.getContentView().measure(View.MeasureSpec.UNSPECIFIED,View.MeasureSpec.UNSPECIFIED);
+            int margin = CommonUtil.getAttribute(PMorePictureActivity.this).height-baseView.btPic.getHeight()-popupWindow.getContentView().getMeasuredHeight();
+            popupWindow.showAtLocation(view1,
+                    Gravity.NO_GRAVITY,
+                    10, margin);
         }
 
         popupWindow.update();
