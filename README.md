@@ -48,7 +48,7 @@ dependencies {
         compile 'com.github.Biligle:Bili:1.0.3'
 }
 
-#使用方法
+#四、使用方法
 ##1、圆形ImageView
 
 直接说用法了：
