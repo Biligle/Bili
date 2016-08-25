@@ -49,7 +49,7 @@ dependencies {
 }
 
 #使用方法
-	##1、圆形ImageView
+##1、圆形ImageView
 
 直接说用法了：
 圆形ImageView
@@ -62,7 +62,7 @@ src
 设置外环颜色civ_border_color="@color/colorAccent"
 </com......CircleIamgeVIew>
 
-2、设置头像（相册和照相）
+##2、设置头像（相册和照相）
 
 实例化头像类（照相和相册）
 HeaderPicture headerPicture = new HeaderPicture(PLoginActivity.this);
@@ -76,7 +76,7 @@ HeaderPicture headerPicture = new HeaderPicture(PLoginActivity.this);
 
 
 
-3、侧滑菜单
+##3、侧滑菜单
 	//初始化SliderHolder，首先隐藏策划菜单
 	baseView.slideHolder.setEnabled(false);
 	//baseView.slideHolder.setDirection(-1);//右边滑出
@@ -105,15 +105,15 @@ HeaderPicture headerPicture = new HeaderPicture(PLoginActivity.this);
 		}
 		//左边滑出
 		doOnScrollLeft{代码同上}
-4、解决项目崩溃问题
+##4、解决项目崩溃问题
 	在Application的onCreate方法里添加
 	CrashHandler crashHandler = CrashHandler.getInstance();
         crashHandler.init(this,**.class);//处理未捕捉的异常，避免出现崩溃
 
-5、发送短信
+##5、发送短信
    new SendMesssage(PLoginActivity.this).sendSMS("hello，world！");
 
-6、监听截取短信
+##6、监听截取短信
    //实现接口IGetMessage
    PLoginActivity implements IGetMessage
    //实现方法
@@ -139,20 +139,20 @@ HeaderPicture headerPicture = new HeaderPicture(PLoginActivity.this);
         }
     }
 
-7、打电话
+##7、打电话
     new Call(PLoginActivity.this).call("10086");
     
-8、录音
+##8、录音
    new VideoUtil(PLoginActivity.this).soundRecorderMethod();
    
-9、视频
+##9、视频
    new VideoUtil(PLoginActivity.this).videoMethod();
    
-10、压缩图片
+##10、压缩图片
    ActivityResult.crop = ture;//false:剪裁，true:不剪裁（如果不设置，默认剪裁）
    照相和相册，如果不调用剪裁功能，就调用压缩功能（HeaderPicture里的compress方法）
    
-11、筛选图片
+##11、筛选图片
    实现ISelect接口
    
    @Override
