@@ -49,7 +49,7 @@ dependencies {
 }
 
 #使用方法
-1、圆形ImageView
+##1、圆形ImageView
 
 直接说用法了：
 圆形ImageView
