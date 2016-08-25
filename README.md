@@ -2,6 +2,9 @@
 
 Q群：468488556 JitPack
 
+#视图
+![image](https://github.com/Biligle/Bili/blob/master/picture/09UFOEZV%24%25%60SOMU%24%7B_P%5BQ(J.png)
+
 1、模式：MVP
 
 2、圆形ImageView
