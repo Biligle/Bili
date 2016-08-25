@@ -3,7 +3,11 @@
 Q群：468488556 JitPack
 
 #视图
-![image](https://github.com/Biligle/Bili/blob/master/picture/09UFOEZV%24%25%60SOMU%24%7B_P%5BQ(J.png)
+![image](https://github.com/Biligle/Bili/blob/master/picture/a.png)
+![image](https://github.com/Biligle/Bili/blob/master/picture/b.png)
+![image](https://github.com/Biligle/Bili/blob/master/picture/c.png)
+![image](https://github.com/Biligle/Bili/blob/master/picture/d.png)
+![image](https://github.com/Biligle/Bili/blob/master/picture/e.png)
 
 1、模式：MVP
 
