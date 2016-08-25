@@ -114,21 +114,21 @@ src
    	new SendMesssage(PLoginActivity.this).sendSMS("hello，world！");
 
 ##6、监听截取短信
-   //实现接口IGetMessage
-   	PLoginActivity implements IGetMessage
+   	//实现接口IGetMessage
+   		PLoginActivity implements IGetMessage
 	 //实现方法
-	 @Override
-	 public void getMessage(String ms) {
-	  MyToastView.showToast(ms,this);
+	 	@Override
+	 	public void getMessage(String ms) {
+		 MyToastView.showToast(ms,this);
+	 	}
+   		@Override
+		protected void onResume() {
+		super.onResume();
+        	//注册截取短信监听
+        	autoGetCodeUtil = new GetMessageUtil(this,this,
+        	 new Handler(),null);
+        	getContentResolver().registerContentObserver(Uri.parse("content://sms/"),true,autoGetCodeUtil);
 	 }
-   	@Override
-	protected void onResume() {
-	super.onResume();
-        //注册截取短信监听
-        autoGetCodeUtil = new GetMessageUtil(this,this,
-                new Handler(),null);
-        getContentResolver().registerContentObserver(Uri.parse("content://sms/"),true,autoGetCodeUtil);
-    }
 
     @Override
     protected void onPause() {
