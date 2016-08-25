@@ -2,13 +2,14 @@
 
 Q群：468488556 JitPack
 
-#视图
+#一、视图
 ![image](https://github.com/Biligle/Bili/blob/master/picture/a.png)
 ![image](https://github.com/Biligle/Bili/blob/master/picture/b.png)
 ![image](https://github.com/Biligle/Bili/blob/master/picture/c.png)
 ![image](https://github.com/Biligle/Bili/blob/master/picture/d.png)
 ![image](https://github.com/Biligle/Bili/blob/master/picture/e.png)
 
+#二、简介
 1、模式：MVP
 
 2、圆形ImageView
@@ -33,7 +34,9 @@ Q群：468488556 JitPack
 
 12、筛选图片
 
-13、studio导入依赖
+#三、引用动态库
+
+studio导入依赖
 
 在根build.gradle里：
 
@@ -42,5 +45,5 @@ allprojects { repositories { ... maven { url "https://jitpack.io" } } }
 在第二个build.gradle里：
 
 dependencies {
-        compile 'com.github.Biligle:Bili:1.0.0'
+        compile 'com.github.Biligle:Bili:1.0.3'
 }
