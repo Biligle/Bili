@@ -24,6 +24,7 @@ import android.graphics.Color;
 import android.graphics.ColorFilter;
 import android.graphics.Matrix;
 import android.graphics.Paint;
+import android.graphics.Rect;
 import android.graphics.RectF;
 import android.graphics.Shader;
 import android.graphics.drawable.BitmapDrawable;
@@ -61,6 +62,12 @@ public class CircleImageView extends ImageView {
     private int mBorderColor = DEFAULT_BORDER_COLOR;
     private int mBorderWidth = DEFAULT_BORDER_WIDTH;
     private int mFillColor = DEFAULT_FILL_COLOR;
+    private int mytextSize = 30;
+    public String mytextContent2 = "";
+    private String mytextContent;
+    private int mytextContentColor = Color.BLACK;
+    //矩形对象，用于计算文字位置时使用
+    private Rect rect;
 
     private Bitmap mBitmap;
     private BitmapShader mBitmapShader;
@@ -96,7 +103,9 @@ public class CircleImageView extends ImageView {
         mBorderColor = a.getColor(R.styleable.CircleImageView_civ_border_color, DEFAULT_BORDER_COLOR);
         mBorderOverlay = a.getBoolean(R.styleable.CircleImageView_civ_border_overlay, DEFAULT_BORDER_OVERLAY);
         mFillColor = a.getColor(R.styleable.CircleImageView_civ_fill_color, DEFAULT_FILL_COLOR);
-
+        mytextContent = a.getString(R.styleable.CircleImageView_mytextContent);
+        mytextSize = a.getDimensionPixelSize(R.styleable.CircleImageView_mytextSize,30);
+        mytextContentColor = a.getColor(R.styleable.CircleImageView_mytextContent_color,DEFAULT_BORDER_COLOR);
         a.recycle();
 
         init();
@@ -133,6 +142,19 @@ public class CircleImageView extends ImageView {
 
     @Override
     protected void onDraw(Canvas canvas) {
+        Paint paint = new Paint();
+        //将画笔的文字大小设置为我们定义的大小
+        paint.setTextSize(mytextSize);
+        paint.setColor(mytextContentColor);
+        rect = new Rect();
+        /**
+         * 此方法可以获得文字所在的矩形区域，并赋给rect
+         * 参数1：传入文字的内容
+         * 参数2：传入文字起始的长度，一般为0
+         * 参数3：传入文字结束的长度，一般为text.length
+         * 参数4：传入一个Rect矩形对象
+         */
+        paint.getTextBounds(mytextContent, 0, mytextContent.length(), rect);
         if (mDisableCircularTransformation) {
             super.onDraw(canvas);
             return;
@@ -146,6 +168,11 @@ public class CircleImageView extends ImageView {
             canvas.drawCircle(mDrawableRect.centerX(), mDrawableRect.centerY(), mDrawableRadius, mFillPaint);
         }
         canvas.drawCircle(mDrawableRect.centerX(), mDrawableRect.centerY(), mDrawableRadius, mBitmapPaint);
+        if(!"".equals(mytextContent2)){
+            canvas.drawText(mytextContent2, getWidth() / 2 - rect.width() / 2, getHeight() / 2 + rect.height() / 2, paint);
+        }else{
+            canvas.drawText(mytextContent, getWidth() / 2 - rect.width() / 2, getHeight() / 2 + rect.height() / 2, paint);
+        }
         if (mBorderWidth > 0) {
             canvas.drawCircle(mBorderRect.centerX(), mBorderRect.centerY(), mBorderRadius, mBorderPaint);
         }
