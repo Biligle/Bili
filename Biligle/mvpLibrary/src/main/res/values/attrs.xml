@@ -6,7 +6,6 @@
         <attr name="mytextContent_color" format="color" />
         <attr name="civ_border_overlay" format="boolean" />
         <attr name="civ_fill_color" format="color" />
-        <attr name="mytextContent" format="string" type="string"/>
         <attr name="mytextSize" format="dimension" type="dimension"></attr>
     </declare-styleable>
 </resources>
