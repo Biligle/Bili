@@ -66,6 +66,7 @@ public class PLoginActivity extends ActivityResult<VLogin> implements IResponse,
     @Override
     protected void setNormal() {
         super.setNormal();
+        baseView.imageView.mytextContent = "SunShan";
         baseView.slideHolder.setEnabled(false);
         baseView.slideHolder.setSpeed(2);
 //        baseView.slideHolder.setDirection(-1);//右边滑出
