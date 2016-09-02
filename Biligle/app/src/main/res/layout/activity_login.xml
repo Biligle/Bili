@@ -89,7 +89,6 @@
             android:layout_centerHorizontal="true"
             app:civ_border_width="2dp"
             app:civ_border_color="@color/colorAccent"
-            app:mytextContent="珊珊"
             app:mytextSize="30sp"
             app:mytextContent_color="@color/colorAccent"/>
         <EditText
